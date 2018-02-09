@@ -21,6 +21,20 @@
     }
     $(document).ready(function() {
         /* On peut travailler sur le DOM ! */
+
+        function Damier() {
+          let damier = $(id)
+          function construct(sizeX,sizeY,id) {
+            for (let i = 0; i < sizeX; i++) {
+              let tr = $('<tr />');
+              for (var j = 0; j < sizeY; j++) {
+                tr.append($('<td />').addClass(((j+i)%2 == 0 ? 'case-blanche':'case-noire')).html('TD'))
+              }
+              damier.append(tr);
+            }
+          }          
+        }
+
         let damier = $('#damier')
 
         for (let i = 0; i < 8; i++) {
