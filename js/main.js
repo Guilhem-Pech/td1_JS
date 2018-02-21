@@ -1,67 +1,58 @@
-(function() {
+(function () {
+
     "use strict";
     let css_blanc = {
-        'background-color': 'black',
-        'color': 'white',
-        'font-weight': 'bold',
-        'border': 'solid 1px white'
-    }
-    let css_noire = {
-        'background-color': 'white',
-        'color': 'black',
-        'border': 'solid 1px black',
-        'font-weight': 'bold'
-    }
+        'background-color' :'black',
+        'color' : 'white',
+        'border' : 'solid 1px white',
+        'font-weight' : 'bolder',
+        'width' : '50',
+        'height' : '50',
+        'text-align' : 'center'
+    };
+    let css_noir = {
+        'background-color' :'white',
+        'color' : 'black',
+        'border' : 'solid 1px black',
+        'font-weight' : 'bolder',
+        'width' : '50',
+        'height' : '50',
+        'text-align' : 'center'
+    };
+    let css_surbrillance = {
+        'background-color' : 'red',
+        'color' : 'white'
+    };
 
-    let css_rouge = {
-        'background-color': 'red',
-        'color': 'yellow',
-        'border': 'solid 1px black',
-        'font-weight': 'bold'
-    }
-    $(document).ready(function() {
-        /* On peut travailler sur le DOM ! */
+    let goLight = function () {
+        $(this).css(css_surbrillance);
+    };
 
-        function Damier() {
-          let damier = $(id)
-          function construct(sizeX,sizeY,id) {
-            for (let i = 0; i < sizeX; i++) {
-              let tr = $('<tr />');
-              for (var j = 0; j < sizeY; j++) {
-                tr.append($('<td />').addClass(((j+i)%2 == 0 ? 'case-blanche':'case-noire')).html('TD'))
-              }
-              damier.append(tr);
-            }
-          }          
-        }
+    let goWhite = function () {
+        $(this).css(css_blanc);
+    };
 
-        let damier = $('#damier')
+    let goBlack = function () {
+        $(this).css(css_noir);
+    };
 
-        for (let i = 0; i < 8; i++) {
-          let tr = $('<tr />');
-          for (var j = 0; j < 10; j++) {
-            tr.append($('<td />').addClass(((j+i)%2 == 0 ? 'case-blanche':'case-noire')).html('TD'))
-          }
-          damier.append(tr);
-        }
+    let creer_case_noire = function () {
+        return $('<td />').addClass('case-noire').html('N');
+    };
+    let creer_case_blanche = function () {
+        return $('<td />').addClass('case-blanche').html('B');
+    };
 
+    
+    $(() => {
+        let dummy = new Damier(3,3,'#damier');
 
-        let case_blanche = $('.case-blanche');
-        let case_noire = $('.case-noire');
+        let case_blanche = $(".case-blanche");
+        let case_noire = $(".case-noire");
 
+        case_blanche.css(css_blanc).hover(goLight,goWhite); // Chaining + callback de bogoss
 
-        case_blanche.css(css_blanc).hover(function(event) {
-            $(this).css(css_rouge);
-        }, function() {
-            $(this).css(css_blanc);
-        });
-
-        case_noire.css(css_noire).hover(function(event) {
-            $(this).css(css_rouge);
-        }, function() {
-            $(this).css(css_noire);
-        });
-
-
+        case_noire.css(css_noir).hover(goLight,goBlack);
     });
-})();
+    
+}) ();
